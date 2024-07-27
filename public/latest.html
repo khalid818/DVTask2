@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Command</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+        }
+        .command {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Latest Command</h1>
+        <div class="command" id="latestCommand">Loading...</div>
+    </div>
+
+    <script>
+        fetch('/latest')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('latestCommand').textContent = data.command;
+                } else {
+                    document.getElementById('latestCommand').textContent = 'Error fetching latest command';
+                }
+            })
+            .catch((error) => {
+                document.getElementById('latestCommand').textContent = 'Error fetching latest command';
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
