@@ -36,7 +36,7 @@ sql.connect(dbConfig, (err) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route to fetch the latest command
-app.get('/latest', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const request = new sql.Request();
         const result = await request.query('SELECT TOP 1 command FROM commands ORDER BY id DESC');
@@ -46,10 +46,6 @@ app.get('/latest', async (req, res) => {
         console.error('Error fetching data:', err);
         res.status(500).json({ success: false, message: 'Error fetching latest command' });
     }
-});
-
-app.get('/', (req, res) => {
-  res.redirect('/latest');
 });
 
 app.listen(port, () => {
