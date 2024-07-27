@@ -48,6 +48,10 @@ app.get('/latest', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+  res.redirect('/latest');
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
